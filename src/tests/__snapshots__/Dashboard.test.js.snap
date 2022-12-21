@@ -5,6 +5,11 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
+      <h1
+        style="text-align: center;"
+      >
+        Welcome 
+      </h1>
       <div
         class="container"
       >
@@ -16,24 +21,21 @@ Object {
         <ul
           style="display: flex; gap: 3rem; justify-content: center;"
         />
-      </div>
-      <br />
-      <hr />
-      <div
-        class="done"
-      >
-        <h3
-          style="text-align: center;"
+        <br />
+        <button
+          style="margin-left: 45rem;"
         >
-          Done
-        </h3>
-        <ul
-          style="display: flex; gap: 3rem; justify-content: center;"
-        />
+          Show Answerd Questions
+        </button>
       </div>
     </div>
   </body>,
   "container": <div>
+    <h1
+      style="text-align: center;"
+    >
+      Welcome 
+    </h1>
     <div
       class="container"
     >
@@ -45,20 +47,12 @@ Object {
       <ul
         style="display: flex; gap: 3rem; justify-content: center;"
       />
-    </div>
-    <br />
-    <hr />
-    <div
-      class="done"
-    >
-      <h3
-        style="text-align: center;"
+      <br />
+      <button
+        style="margin-left: 45rem;"
       >
-        Done
-      </h3>
-      <ul
-        style="display: flex; gap: 3rem; justify-content: center;"
-      />
+        Show Answerd Questions
+      </button>
     </div>
   </div>,
   "debug": [Function],

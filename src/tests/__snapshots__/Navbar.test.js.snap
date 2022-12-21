@@ -31,16 +31,16 @@ Object {
             class="new"
           >
             <a
-              href="/new"
+              href="/add"
             >
               New
             </a>
           </li>
           <li>
             <a
-              href="/"
+              href="/login"
             >
-              Logout
+              Login
             </a>
           </li>
         </ul>
@@ -75,16 +75,16 @@ Object {
           class="new"
         >
           <a
-            href="/new"
+            href="/add"
           >
             New
           </a>
         </li>
         <li>
           <a
-            href="/"
+            href="/login"
           >
-            Logout
+            Login
           </a>
         </li>
       </ul>
