@@ -21,11 +21,14 @@ function Navbar({ dispatch, authedUser }) {
           <Link to="/add">New</Link>
         </li>
         {authedUser ? (
-          <li>
-            <Link to="/login" onClick={handleLogout}>
-              Logout
-            </Link>
-          </li>
+          <>
+            <li>
+              <Link to="/login" onClick={handleLogout}>
+                Logout
+              </Link>
+            </li>
+            <p style={{ transform: "translateY(-15px)" }}>{authedUser}</p>
+          </>
         ) : (
           <li>
             <Link to="/login">Login</Link>

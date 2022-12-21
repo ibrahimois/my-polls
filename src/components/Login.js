@@ -10,10 +10,13 @@ function Login({ dispatch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     setSeccuss(!seccuss);
     dispatch(handleSetAuthedUser(username));
-    navigate("/");
+    if (document.referrer.includes("questions")) {
+      navigate("/404")
+    } else {
+      navigate("/");
+    }
   };
 
   const handleChangeUsernameChange = (e) => {
@@ -38,7 +41,7 @@ function Login({ dispatch }) {
       <h2>Employee Polls</h2>
       <h3>Login</h3>
       <div className="options">
-        <label> First Option</label>
+        <label> Username</label>
         <input
           type="text"
           placeholder="Enter username"
@@ -47,7 +50,7 @@ function Login({ dispatch }) {
           required
           style={{ width: "150px" }}
         />
-        <label> Second Option</label>
+        <label> Password</label>
         <input
           type="password"
           placeholder="Enter password"

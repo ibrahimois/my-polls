@@ -9,9 +9,15 @@ function Dashboard(props) {
     setShow(!show);
   };
 
+  if (
+    props.authedUser === null &&
+    window.location.href != "http://localhost:3000/login"
+  ) {
+    window.location.href = "http://localhost:3000/login";
+  }
+
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Welcome {props.authedUser}</h1>
       {show === true ? (
         <div className="container">
           <h3 style={{ textAlign: "center" }}>New Questions</h3>
@@ -56,21 +62,28 @@ function Dashboard(props) {
 }
 
 const mapStateToProps = ({ questions, authedUser, users }) => {
-  const questionsList = Object.keys(questions).sort(
-    (a, b) => questions[b].timestamp - questions[a].timestamp
-  );
-  const user = users[authedUser];
-  const answeredQuestions = questionsList.filter(
-    (question) => user.answers[question]
-  );
-  const unAnsweredQuestions = questionsList.filter(
-    (question) => !user.answers[question]
-  );
-  return {
-    answeredQuestions,
-    unAnsweredQuestions,
-    authedUser,
-  };
+  if (authedUser !== null) {
+
+    const questionsList = Object.keys(questions).sort(
+      (a, b) => questions[b].timestamp - questions[a].timestamp
+    );
+    const user = users[authedUser];
+    const answeredQuestions = questionsList.filter(
+      (question) => user.answers[question]
+    );
+    const unAnsweredQuestions = questionsList.filter(
+      (question) => !user.answers[question]
+    );
+    return {
+      answeredQuestions,
+      unAnsweredQuestions,
+      authedUser,
+    };
+  } else {
+    return {
+      authedUser
+    }
+  }
 };
 
 export default connect(mapStateToProps)(Dashboard);

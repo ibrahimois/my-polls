@@ -15,9 +15,9 @@ const withRouter = (Component) => {
 };
 
 function Choices(props) {
-  console.log(props.hasAnswered);
   const { dispatch, question, authedUser, id } = props;
   const [hasAnswered, setHasAnswered] = useState(props.hasAnswered);
+  const [choosenOption, setChoosenOption] = useState(props.choosenOption)
   const handleAnswering = (option) => {
     dispatch(
       handleSaveQuestionAnswer({
@@ -26,50 +26,59 @@ function Choices(props) {
         authedUser,
       })
     );
+    setChoosenOption(option)
     setHasAnswered(true);
   };
 
   return (
-    <div className="answer">
-      <h1>Poll by {question.author}</h1>
-      <div
-        className="book-cover"
-        style={{
-          width: 128,
-          height: 193,
-          backgroundImage: `url("${props.user.avatarURL}")`,
-        }}
-      ></div>
-      <h2>Would You Rather</h2>
-      <div className="options">
-        <div className="option-one">
-          <p>{question.optionOne.text}</p>
-          <button
-            onClick={() => handleAnswering("optionOne")}
-            disabled={hasAnswered}
-          >
-            Click
-          </button>
+    <div >
+      {hasAnswered === false ?
+        <div className="answer">
+          <h1>Poll by {question.author}</h1>
+          <img src={props.user.avatarURL} alt="Poll's creator avatar" />
+          <h2>Would You Rather</h2>
+          <div className="options">
+            <div className="option-one">
+              <p>{question.optionOne.text}</p>
+              <button
+                onClick={() => handleAnswering("optionOne")}
+              >
+                Click
+              </button>
+            </div>
+            <div className="option-two">
+              <p>{question.optionTwo.text}</p>
+              <button
+                onClick={() => handleAnswering("optionTwo")}
+              >
+                Click
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="option-two">
-          <p>{question.optionTwo.text}</p>
-          <button
-            onClick={() => handleAnswering("optionTwo")}
-            disabled={hasAnswered}
-          >
-            Click
-          </button>
+        :
+        <div className="answer">
+          <h1>Poll by {question.author}</h1>
+          <img src={props.user.avatarURL} alt="Poll's creator avatar" />
+          <h2>You choose: {question[choosenOption].text}</h2>
+          <div className="options">
+            <p>{question[choosenOption].votes.length} people choose this option</p>
+            <p>{question[choosenOption].votes.length / 4 * 100}% of people  choose this option</p>
+          </div>
         </div>
-      </div>
-    </div>
+      }
+
+    </div >
   );
 }
 
 const mapStateToProps = ({ authedUser, questions, users }, props) => {
   const { id } = props.router.params;
   var hasAnswered = false;
-  if (!(id in users[questions[id].author].answers)) {
+  var choosenOption = null;
+  if ((id in users[authedUser].answers)) {
     hasAnswered = true;
+    choosenOption = users[authedUser].answers[id]
   }
   return {
     id,
@@ -77,6 +86,7 @@ const mapStateToProps = ({ authedUser, questions, users }, props) => {
     question: questions[id],
     user: users[questions[id].author],
     hasAnswered,
+    choosenOption
   };
 };
 
