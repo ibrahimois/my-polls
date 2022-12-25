@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 function Leaderboard({ sortedUsers }) {
-  console.log(sortedUsers)
+  console.log(sortedUsers);
   return (
     <table
       style={{
@@ -20,7 +20,10 @@ function Leaderboard({ sortedUsers }) {
       {sortedUsers.map((user, index) => (
         <tbody key={index}>
           <tr>
-            <td><img src={user.avatarURL} alt="users avatar!" /> {user.name}</td>
+            <td>
+              <img src={user.avatarURL} alt="users avatar!" width={"20px"} />{" "}
+              {user.name}
+            </td>
             <td>{user.answersLength}</td>
             <td>{user.questionsLength}</td>
           </tr>

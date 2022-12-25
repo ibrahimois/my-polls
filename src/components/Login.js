@@ -13,7 +13,9 @@ function Login({ dispatch }) {
     setSeccuss(!seccuss);
     dispatch(handleSetAuthedUser(username));
     if (document.referrer.includes("questions")) {
-      navigate("/404")
+      navigate("/404");
+    } else if (window.history.length > 3) {
+      window.history.back();
     } else {
       navigate("/");
     }
